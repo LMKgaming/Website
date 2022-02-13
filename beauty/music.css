@@ -1,0 +1,246 @@
+body {
+  background: linear-gradient(to top,rgba(0,0,0,0.7),rgba(0,0,0,0.6)), url(https://i.pinimg.com/originals/78/69/45/7869459a488917aef60594876a7ef13b.png) no-repeat center/cover;
+}
+
+.player {
+  width: 500px;
+  height: 400px;
+  margin: 0 auto;
+  background-color: #2daaed;
+  border-radius: 15px;
+  padding: 0 20px;
+  /* display: flex;
+  justify-content: center;
+  align-items: center; */
+}
+
+.song-status {
+  width: fit-content;
+  margin: 10px auto 0;
+  font-size: 1.5rem;
+  color: white
+}
+
+.song-name {
+  margin: 5px 0 10px;
+  color: white;
+}
+
+.song-name h2,
+.song-name h3 {
+  width: fit-content;
+  margin: 0 auto;
+}
+
+.song-thumb {
+  width: 200px;
+  height: 200px;
+  margin: 0 auto 20px;
+}
+
+.song-thumb img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  object-position: center;
+  border-radius: 50%;
+  border: 5px solid red;
+}
+
+/* .rotate {
+  animation: rotate 8s linear infinite;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.progress-bar {
+  width: 100%;
+  margin: 0 auto 10px;
+} */
+
+.progress-bar input#progress-bar {
+  /* -webkit-appearance: none;  Override default CSS styles */
+  cursor: pointer;
+  appearance: none;
+  width: 100%; /* Full-width */
+  height: 8px; /* Specified height */
+  border-radius: 100rem;
+  background: linear-gradient(to left, green, red); /* Grey background */
+  outline: none; /* Remove outline */
+  opacity: 0.6; /* Set transparency (for mouse-over effects on hover) */
+  /* -webkit-transition: .2s; 0.2 seconds transition on hover */
+  transition: opacity .5s;
+}
+
+.progress-bar input#progress-bar:hover {
+  opacity: 1;
+}
+
+.progress-bar input#progress-bar::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%; 
+  background: white;
+  cursor: pointer;
+}
+
+.controller {
+  padding: 0 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 2rem;
+  margin-top: 50px;
+}
+
+.controller .control-btn {
+  outline: none;
+  border: none;
+  background: none;
+  color: white;
+  cursor: pointer;
+}
+
+/* .controller .pause {
+  font-size: 3rem;
+  display: none;
+} */
+
+.controller .play {
+  font-size: 3rem;
+}
+
+.controller .back:active,
+.controller .back-seek:active,
+.controller .next-seek:active,
+.controller .next:active {
+  color: red;
+}
+
+.controller #volume-bar[type="range"] {
+  /* writing-mode: bt-lr;
+  -webkit-appearance: slider-vertical; */
+  cursor: pointer;
+  appearance: none;
+  /* width: 100%; */
+  height: 6px;
+  border-radius: 100rem;
+  background: linear-gradient(to left, blue, yellow);
+  outline: none;
+  opacity: 0.6;
+  transition: opacity .5s;
+}
+
+.controller #volume-bar[type="range"]:hover {
+  opacity: 1;
+}
+
+.controller #volume-bar::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%; 
+  background: white;
+  cursor: pointer;
+}
+
+.output {
+  color: red;
+}
+
+.active-config {
+  color: red;
+  background-color: transparent;
+}
+
+.playlist {
+  width: 500px;
+  height: 200px;
+  /* background-color: white; */
+  margin: 10px 0;
+  overflow-y: scroll;
+}
+
+.playlist::-webkit-scrollbar {
+  width: 0px;
+  /* border-radius: 15px; */
+}
+
+.playlist::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 15px;
+}
+
+.playlist::-webkit-scrollbar-thumb {
+  background: radial-gradient(pink, violet);
+  border-radius: 15px;
+}
+
+.song-file {
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  background-color: white;
+  /* justify-content: space-between; */
+  align-items: center;
+  padding: 10px 0;
+  border-radius: 15px;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.song-file:hover {
+  opacity: 0.8;
+}
+
+.playing {
+  background-color: violet;
+}
+
+.song-thumb-mini {
+  width: 50px;
+  height: 50px;
+  margin-left: 20px;
+}
+
+.song-thumb-mini img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  object-position: center;
+  border-radius: 50%;
+  /* border: 5px solid red; */
+}
+
+.song-desc-mini {
+  margin-left: 20px;
+  flex: 3;
+}
+
+.song-desc-mini h3 {
+  font-size: 1.8rem;
+}
+
+.song-desc-mini h4 {
+  font-size: 1.2rem;
+}
+
+.song-option {
+  /* justify-self: flex-end; */
+  margin: 0 20px;
+  font-size: 1.5rem;
+  background-color: #ccc;
+  padding: 10px;
+  border-radius: 100rem;
+  color: #333;
+}

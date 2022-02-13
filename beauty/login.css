@@ -1,0 +1,299 @@
+body {
+    background: linear-gradient(to top,rgba(0,0,0,0.8),rgba(0,0,0,0.6)) url(https://images5.alphacoders.com/374/thumb-1920-374077.jpg) no-repeat center/cover;
+}
+
+.content {
+    margin: unset;
+}
+
+.subnav {
+    width: 300px;
+    display: flex;
+    flex-direction: row;
+    overflow: hidden;
+    margin-bottom: 25px;
+    border-radius: 15px;
+}
+
+.subnav button {
+    width: 50%;
+    padding: 10px 0;
+    outline: none;
+    border: none;
+    background-color: cyan;
+    font-size: 2rem;
+    text-transform: capitalize;
+    color: red;
+    font-style: italic;
+    cursor: pointer;
+    transition: all 0.5s linear;
+}
+
+.subnav .login-btn {
+    border-right: 2px solid black;
+}
+
+.on-page {
+    background-color: red !important;
+    color: white !important;
+}
+
+.subnav .register-btn {
+    border-left: 2px solid black;
+}
+
+.login {
+    transition: 0.5s;
+    opacity: 1;
+    width: 300px;
+    height: 400px;
+    background-color: rgba(255, 255, 255, .15);  
+    backdrop-filter: blur(5px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 15px;
+}
+
+.login h2 {
+    font-size: 3rem;
+    text-transform: capitalize;
+    font-weight: 700;
+    margin-top: 50px ;
+    color: white;
+}
+
+.login .other {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    margin: 20px 0;
+}
+
+.login .other i::before {
+    width: 100%;
+    height: 100%;
+    background: rgba(250, 255, 0, 0.4);
+    padding: 8px;
+    border-radius: 100rem;
+}
+
+.login .other i {
+    font-size: 3.5rem;
+    color: white;;
+}
+
+.login .form-email {
+    width: 100%;
+}
+
+.login .other i:hover::before{
+    color: red;
+    cursor: pointer;
+}
+
+.login .form-email .text {
+    margin: 0 10px;
+    font-size: 1.5rem;
+    font-weight: 500;
+    text-transform: capitalize;
+    color: white;
+}
+
+.login .form-email .email {
+    margin-right: 10px;
+    width: 76%;
+    outline: none;
+    border: 1px solid black;
+    font-size: 1.5rem;
+    background-color: transparent;
+    color: white;
+}
+
+.login .form-password {
+    width: 100%;
+}
+
+.login .form-password .text {
+    margin: 0 10px;
+    font-size: 1.5rem;
+    font-weight: 500;
+    text-transform: capitalize;
+    color: white;
+}
+
+.login .form-password .password {
+    margin-right: 10px;
+    width: 68%;
+    outline: none;
+    border: 1px solid  black;
+    font-size: 1.5rem;
+    background-color: transparent;
+    color: white;
+    cursor: pointer;
+}
+
+.login a {
+    align-self: flex-end;
+    margin-right: 15px;
+    color: red;
+    text-decoration: none;
+    font-size: 1.5rem;
+    text-transform: capitalize;
+}
+
+.login button {
+    margin-bottom: 50px;
+    align-self: flex-start;
+    margin-left: 30px;
+    width: 100px;
+    height: 35px;
+    outline: none;
+    border-radius: 5px;
+    background-color: red;
+    color: white;;
+    border: none;
+    text-transform: capitalize;
+    cursor: pointer;
+    font-size: 1.8rem;
+}
+
+.register {
+    transition: 0.5s;
+    opacity: 1;
+    width: 300px;
+    height: 400px;
+    background-color: rgba(255, 255, 255, .15);  
+    backdrop-filter: blur(5px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 15px;
+}
+
+.register h2 {
+    font-size: 3rem;
+    text-transform: capitalize;
+    font-weight: 700;
+    margin-top: 50px ;
+    color: white;
+}
+
+.register .other {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    margin: 20px 0;
+}
+
+.register .other i::before {
+    width: 100%;
+    height: 100%;
+    background: rgba(250, 255, 0, 0.4);
+    padding: 8px;
+    border-radius: 100rem;
+}
+
+.register .other i {
+    font-size: 3.5rem;
+    color: white;;
+}
+
+.register .other i:hover::before{
+    color: red;
+    cursor: pointer;
+}
+
+.register .form-name .text {
+    margin: 0 10px;
+    font-size: 1.5rem;
+    font-weight: 500;
+    text-transform: capitalize;
+    color: white;
+}
+
+.register div {
+    width: 100%;
+}
+
+.register .form-name .name {
+    margin-right: 10px;
+    width: 76%;
+    outline: none;
+    border: 1px solid black;
+    font-size: 1.5rem;
+    background-color: transparent;
+    color: white;
+}
+
+.register .form-email .text {
+    margin: 0 10px;
+    font-size: 1.5rem;
+    font-weight: 500;
+    text-transform: capitalize;
+    color: white;
+}
+
+.register .form-email .email {
+    margin-right: 10px;
+    width: 76%;
+    outline: none;
+    border: 1px solid black;
+    font-size: 1.5rem;
+    background-color: transparent;
+    color: white;
+}
+
+.register .form-password .text {
+    margin: 0 10px;
+    font-size: 1.5rem;
+    font-weight: 500;
+    text-transform: capitalize;
+    color: white;
+}
+
+.register .form-password .password {
+    margin-right: 10px;
+    width: 68%;
+    outline: none;
+    border: 1px solid  black;
+    font-size: 1.5rem;
+    background-color: transparent;
+    color: white;
+    cursor: pointer;
+}
+
+.register .form-repeat-password .text {
+    margin: 0 10px;
+    font-size: 1.5rem;
+    font-weight: 500;
+    text-transform: capitalize;
+    color: white;
+}
+
+.register .form-repeat-password .password-repeat {
+    margin-right: 10px;
+    width: 52%;
+    outline: none;
+    border: 1px solid  black;
+    font-size: 1.5rem;
+    background-color: transparent;
+    color: white;
+    cursor: pointer;
+}
+
+.register button {
+    margin: 25px 0;
+    width: 100px;
+    height: 35px;
+    outline: none;
+    border-radius: 5px;
+    background-color: red;
+    color: white;;
+    border: none;
+    text-transform: capitalize;
+    cursor: pointer;
+    font-size: 1.8rem;
+}

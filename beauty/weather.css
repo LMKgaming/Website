@@ -1,0 +1,90 @@
+body {
+    background: linear-gradient(to top,rgba(0,0,0,0.7),rgba(0,0,0,0.6)), url(../img/hot.png) no-repeat center/cover;
+}
+
+#weather {
+    width: 350px;
+    border-radius: 15px;
+    padding: 30px 20px;
+    background: linear-gradient(to top,rgba(0,0,0,0.4),rgba(0,0,0,0.3)), url(../img/hot.png) no-repeat center/cover;
+}
+
+.weather__search {
+    width: 100%;
+    padding: 10px 20px;
+    border: none;
+    outline: none;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 0 15px 0 15px;
+    box-shadow:0 5px 4px rgba(0,0,0,0.4);
+    transition: 0.4s;
+    font-size: 1.9rem;
+}
+
+.weather__search:focus{
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 15px 0;
+}
+
+.weather__content{
+    text-align: center;
+    color: white;
+    margin: 40px 0;
+    transition: 0.4s;
+}
+
+.capital {
+    text-shadow: 2px 2px rgba(0,0,0,0.3);
+    font-size: 3rem;
+}
+
+.time {
+    margin: 15px 0 20px 0;
+    font-size: 1.5rem;
+}
+
+.temperature {
+    font-size: 6.5rem;
+    text-shadow: 4px 4px rgba(0,0,0,0.7);
+    background: rgba(255, 255, 255, 0.3);
+    box-shadow: 4px 4px rgba(0,0,0,0.5);
+    border: none;
+    border-radius: 15px;
+    margin: 0 30px;
+    padding: 20px;
+}
+
+.short-desc {
+    font-size: 4rem;
+    font-weight: bold;
+    text-shadow: 2px 2px rgba(0,0,0,0.5);
+    margin: 30px 0;
+}
+
+.desc-info {
+    font-size: 2.5rem;
+    text-shadow: 2px 2px rgba(0,0,0,0.5);
+    margin: 0 0 10px 0;
+    text-transform: capitalize;
+}
+
+.more-desc {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.5rem;
+}
+
+.more-desc div {
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+}
+
+.more-desc div i {
+    margin: 10px 0;
+}
+
+.hide {
+    visibility: hidden;
+    opacity: 0;
+}

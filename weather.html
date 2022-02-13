@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+        />
+        <link rel="stylesheet" href="./beauty/main.css" class="css"/>
+        <link rel="stylesheet" href="./beauty/weather.css">
+        <title>weather</title>
+    </head>
+    <body>
+        <div class="app">
+            <div class="nav">
+                <div class="menu-icon">
+                    <button href=""><i class="fas fa-bars"></i></button>
+                </div>
+                <div class="nav__content">
+                    <ul class="content__list">
+                        <li>
+                            <a href="index.html" class="li__home">
+                                <i class="fas fa-home home"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="news.html" class="li__news">
+                                <i class="fas fa-newspaper news"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="music.html" class="li__music">
+                                <i class="fas fa-compact-disc music"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="profile.html" class="li__profile">
+                                <i class="fas fa-id-card profile"></i>
+                            </a>
+                        </li>
+                        <li class="active">
+                            <a href="weather.html" class="li__weather">
+                                <i class="fas fa-cloud cloud"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="nav__option">
+                    <ul class="option__list">
+                        <li>
+                            <button href="" class="li__config">
+                                <i class="fas fa-cog config"></i>
+                            </button>
+                        </li>
+                        <li>
+                            <a href="login.html">
+                                <i class="fas fa-user-circle login"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <button href="">
+                                <i class="fas fa-moon dark"></i>
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="content">
+                <div id="weather">
+                    <input type="text" class="weather__search">
+                    <div class="weather__content">
+                        <h1 class="capital">
+                            <span class="city">Ha Noi</span>
+                            <span>,</span>
+                            <span class="country">VN</span>
+                        </h1>
+                        <div class="time">12/24/2021, 3:25:16 PM</div>
+                        <div class="temperature">
+                            <span class="value">23<sup>o</sup>C</span>
+                        </div>
+                        <div class="short-desc">Clouds</div>
+                        <div class="desc-info">Có Mây</div>
+                        <div class="more-desc">
+                            <div class="visibility">
+                                <i class="far fa-eye"></i>
+                                <span>10000m</span>
+                            </div>
+                            <div class="wind">
+                                <i class="fas fa-wind"></i>
+                                <span>10000m</span>
+                            </div>
+                            <div class="sun">
+                                <i class="far fa-sun"></i>
+                                <span>10000m</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="./function/weather.js"></script>
+        <script src="./function/navbar.js"></script>
+    </body>
+</html>

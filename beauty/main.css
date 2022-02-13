@@ -1,0 +1,133 @@
+:root {
+    --nav-width: 75px;
+    --nav-padding: 10px;
+    --nav-font-size: 1.5rem;
+    --nav-margin: 15px;
+    --primary-color: red;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 62.5%;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+body {
+    background: linear-gradient(to top,rgba(0,0,0,0.7),rgba(0,0,0,0.6)), url(https://images5.alphacoders.com/374/thumb-1920-374077.jpg) no-repeat center/cover;
+}
+
+.nav {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: var(--nav-width);
+    height: 100vh;
+    background-color: rgba(0,0,0,0.3);
+    padding: 0 var(--nav-padding);
+    font-size: var(--nav-font-size);
+    overflow: hidden;
+    transition: all 0.5s linear;
+}
+
+.menu-icon {
+    transition: all 0.5s linear;
+    position: absolute;
+    top: 20px;
+    width: calc(var(--nav-width) - var(--nav-padding)*2);
+    padding: 10px calc(var(--nav-padding)/2);
+    text-align: center;
+}
+
+.nav__content {
+    position:absolute;
+    top: calc(20px + var(--nav-font-size) + var(--nav-margin));
+    transition: all 0.5s linear;
+}
+
+.menu-icon button {
+    outline: none;
+    border: none;
+    background-color: unset;
+    cursor: pointer;
+}
+
+.content__list {
+
+}
+
+.content__list li {
+    transition: all 0.5s linear;
+    margin: var(--nav-margin) 0;
+    width: calc(var(--nav-width) - var(--nav-padding)*2);
+    padding: 10px calc(var(--nav-padding)/2);
+    text-align: center;
+    list-style-type: none;
+}
+
+.content__list li a {
+    outline: none;
+    border: none;
+    background-color: unset;
+    cursor: pointer;
+}
+
+.menu-icon button,
+.content__list li a,
+.option__list li button,
+.option__list li a {
+    text-decoration: none;
+    color: #fff;
+    text-transform: uppercase;
+}
+
+.nav__option {
+    position: absolute;
+    bottom: 0;
+}
+
+.option__list {
+
+}
+
+.option__list li {
+    transition: all 0.5s linear;
+    margin: var(--nav-margin) 0;
+    width: calc(var(--nav-width) - var(--nav-padding)*2);
+    padding: 10px calc(var(--nav-padding)/2);
+    text-align: center;
+    list-style-type: none;
+}
+
+.option__list li button,
+.option__list li a {
+    outline: none;
+    border: none;
+    background-color: unset;
+    cursor: pointer;
+}
+
+.menu-icon:hover,
+.content__list li:hover,
+.option__list li:hover {
+    background-color: crimson;
+    border-radius: 10px;
+}
+
+.active {
+    background-color: green;
+    border-radius: 10px;
+}
+
+.content {
+    margin-left: 75px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
