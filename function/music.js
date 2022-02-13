@@ -100,11 +100,13 @@ function scrollSong(name) {
 }
 
 function loadConfig() {
-    defineProperties.isRepeating = config.isRepeating
-    defineProperties.isShuffling = config.isShuffling
-    defineProperties.currentSong = config.currentSong
-    // console.log(defineProperties.currentSong)
-    defaultRender()
+    if (!config == {}) {
+        defineProperties.isRepeating = config.isRepeating
+        defineProperties.isShuffling = config.isShuffling
+        defineProperties.currentSong = config.currentSong
+        // console.log(defineProperties.currentSong)
+        defaultRender()
+    }
 }
 
 function defaultRender() {
