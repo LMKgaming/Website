@@ -34,12 +34,20 @@ async function changeWeather(capitalSearch) {
         // time.innerText = new Date().toLocaleString('vi')
         if (temp > 25) {
             // hot
-            bodyContent.style.background = `linear-gradient(to top,rgba(0,0,0,0.7),rgba(0,0,0,0.6)), url(../img/hot.png) no-repeat center/cover`
-            idWeather.style.background =  `linear-gradient(to top,rgba(0,0,0,0.2),rgba(0,0,0,0.1)), url(../img/hot.png) no-repeat center/cover`
+            //On local
+            // bodyContent.style.background = `linear-gradient(to top,rgba(0,0,0,0.7),rgba(0,0,0,0.6)), url(../img/hot.png) no-repeat center/cover`
+            // idWeather.style.background =  `linear-gradient(to top,rgba(0,0,0,0.2),rgba(0,0,0,0.1)), url(../img/hot.png) no-repeat center/cover`
+            //On github
+            bodyContent.style.background = `linear-gradient(to top,rgba(0,0,0,0.7),rgba(0,0,0,0.6)), url(../Website/img/hot.png) no-repeat center/cover`
+            idWeather.style.background =  `linear-gradient(to top,rgba(0,0,0,0.2),rgba(0,0,0,0.1)), url(../Website/img/hot.png) no-repeat center/cover`
         } else {
             // freeze
-            bodyContent.style.background = `linear-gradient(to top,rgba(0,0,0,0.7),rgba(0,0,0,0.6)), url(../img/cold.png) no-repeat center/cover`
-            idWeather.style.background =  `linear-gradient(to top,rgba(0,0,0,0.2),rgba(0,0,0,0.1)), url(../img/cold.png) no-repeat center/cover`
+            //On local
+            // bodyContent.style.background = `linear-gradient(to top,rgba(0,0,0,0.7),rgba(0,0,0,0.6)), url(../img/cold.png) no-repeat center/cover`
+            // idWeather.style.background =  `linear-gradient(to top,rgba(0,0,0,0.2),rgba(0,0,0,0.1)), url(../img/cold.png) no-repeat center/cover`
+            //On github
+            bodyContent.style.background = `linear-gradient(to top,rgba(0,0,0,0.7),rgba(0,0,0,0.6)), url(../website/img/cold.png) no-repeat center/cover`
+            idWeather.style.background =  `linear-gradient(to top,rgba(0,0,0,0.2),rgba(0,0,0,0.1)), url(../website/img/cold.png) no-repeat center/cover`
         }
     } else {
         weatherContent.classList.add("hide")
