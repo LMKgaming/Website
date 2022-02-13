@@ -46,8 +46,8 @@ async function changeWeather(capitalSearch) {
             // bodyContent.style.background = `linear-gradient(to top,rgba(0,0,0,0.7),rgba(0,0,0,0.6)), url(../img/cold.png) no-repeat center/cover`
             // idWeather.style.background =  `linear-gradient(to top,rgba(0,0,0,0.2),rgba(0,0,0,0.1)), url(../img/cold.png) no-repeat center/cover`
             //On github
-            bodyContent.style.background = `linear-gradient(to top,rgba(0,0,0,0.7),rgba(0,0,0,0.6)), url(../website/img/cold.png) no-repeat center/cover`
-            idWeather.style.background =  `linear-gradient(to top,rgba(0,0,0,0.2),rgba(0,0,0,0.1)), url(../website/img/cold.png) no-repeat center/cover`
+            bodyContent.style.background = `linear-gradient(to top,rgba(0,0,0,0.7),rgba(0,0,0,0.6)), url(../Website/img/cold.png) no-repeat center/cover`
+            idWeather.style.background =  `linear-gradient(to top,rgba(0,0,0,0.2),rgba(0,0,0,0.1)), url(../Website/img/cold.png) no-repeat center/cover`
         }
     } else {
         weatherContent.classList.add("hide")
