@@ -5,6 +5,7 @@ body {
 .content {
   flex-direction: row;
   justify-content: space-around;
+  position: relative;
 }
 
 .left {
@@ -289,6 +290,7 @@ body {
   padding-bottom: 25px;
   height: 100%;
   width: 100%;
+  text-align: justify;
 }
 
 #lyric::-webkit-scrollbar {
@@ -304,4 +306,56 @@ body {
 #lyric::-webkit-scrollbar-thumb {
   background: radial-gradient(pink, violet);
   border-radius: 15px;
+}
+
+.wrapper {
+  position: absolute;
+  margin-top: 25px;
+  margin-left: 25px;
+  top: 0;
+  left: 0;
+}
+
+.form {
+  width: fit-content;
+  height: fit-content;
+  padding: 0 20px;
+}
+
+.input {
+  width: 100%;
+  border: 0px;
+  background: transparent;
+  border-bottom: 3px solid #62d474;
+  outline: none;
+  padding: 10px;
+  /* background-color: gray; */
+  color: #fff;
+  font-size: 20px;
+  transition: all 0.5s ease;
+  transform: scale(0);
+}
+
+#search {
+  /* transform: translateX(50%); */
+  color: #fff;
+  font-size: 20px;
+  position: relative;
+  top: 30px;
+  left: 55px;
+  opacity: 0;
+  letter-spacing: 1px;
+  transition: all 0.5s ease;
+}
+
+#search.active-search {
+  opacity: 1;
+}
+
+.input.active-search {
+  transform: scale(1);
+}
+
+#search.focus-search {
+  top:0;
 }

@@ -18,6 +18,7 @@ var lyricBtn = document.querySelector(".lyric")
 var lyricContent = document.querySelector("#lyric")
 var left = document.querySelector(".left")
 var right = document.querySelector(".right")
+var find = document.querySelector(".find")
 
 const PLAYER_STORAGE_KEY = 'KHOAYEUBINH'
 
@@ -859,3 +860,20 @@ lyricBtn.onclick = function () {
         },500)
     }
 }
+
+var labelSearch = document.querySelector("#search")
+var input = document.querySelector(".input")
+
+find.onclick = function() {
+    labelSearch.classList.toggle("active-search")
+    input.classList.toggle("active-search")
+}
+
+input.addEventListener("focusin",function() {
+    labelSearch.classList.add("focus-search")
+})
+input.addEventListener("focusout",function() {
+    if (input.value == "") {
+        labelSearch.classList.remove("focus-search")
+    }
+})
