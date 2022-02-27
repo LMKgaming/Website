@@ -863,10 +863,12 @@ lyricBtn.onclick = function () {
 
 var labelSearch = document.querySelector("#search")
 var input = document.querySelector(".input")
+var searchResult = document.querySelector(".search-result")
 
 find.onclick = function() {
     labelSearch.classList.toggle("active-search")
     input.classList.toggle("active-search")
+    this.firstElementChild.classList.toggle("active-config")
 }
 
 input.addEventListener("focusin",function() {
@@ -877,3 +879,20 @@ input.addEventListener("focusout",function() {
         labelSearch.classList.remove("focus-search")
     }
 })
+input.addEventListener("input",renderSearch)
+function renderSearch() {
+    if (!input.value == "") {
+        const htmls = songList.map((song,index)=>{
+            if (song.name.includes(input.value) || song.author.includes(input.value)) {
+                return `
+                    <div class="song-info" data-value="${index}">
+                        <h3>${song.name}</h3>
+                        <h4>${song.author}</h4>
+                    </div>`
+            }
+        })
+        searchResult.innerHTML = htmls.join("")
+    } else {
+        searchResult.innerHTML = ""
+    } 
+}
