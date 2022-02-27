@@ -840,6 +840,7 @@ function volumeBarChange() {
 }
 
 lyricBtn.onclick = function () {
+    this.firstElementChild.classList.toggle("active-config")
     if (left.classList.contains("trans")) {
         right.style.opacity = "0"
         right.style.visible = "hidden"
