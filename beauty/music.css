@@ -2,6 +2,20 @@ body {
   background: linear-gradient(to top,rgba(0,0,0,0.7),rgba(0,0,0,0.6)), url(https://i.pinimg.com/originals/78/69/45/7869459a488917aef60594876a7ef13b.png) no-repeat center/cover;
 }
 
+.content {
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.left {
+  transform: translateX(34%);
+  transition: all 0.8s linear;
+}
+
+.trans {
+  transform: translateX(0);
+}
+
 .player {
   width: 500px;
   height: 400px;
@@ -23,13 +37,13 @@ body {
 
 .song-name {
   margin: 5px 0 10px;
-  color: white;
+  color: red;
 }
 
 .song-name h2,
 .song-name h3 {
   width: fit-content;
-  margin: 0 auto;
+  margin: 5px auto;
 }
 
 .song-thumb {
@@ -169,6 +183,7 @@ body {
   /* background-color: white; */
   margin: 10px 0;
   overflow-y: scroll;
+  border-radius: 15px;
 }
 
 .playlist::-webkit-scrollbar {
@@ -193,7 +208,7 @@ body {
   background-color: white;
   /* justify-content: space-between; */
   align-items: center;
-  padding: 10px 0;
+  padding: 12px 0;
   border-radius: 15px;
   margin-bottom: 10px;
   cursor: pointer;
@@ -243,4 +258,50 @@ body {
   padding: 10px;
   border-radius: 100rem;
   color: #333;
+}
+
+.right {
+  width: 0;
+  height: 0;
+  background-color: rgba(0,0,0,0.7);
+  overflow: hidden;
+  font-size: 2rem;
+  color: greenyellow;
+  padding: 20px;
+  border-radius: 15px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.5s linear,
+  width 0.75s linear,height 0.75s 0.5s linear;
+}
+
+.right span {
+  display: block;
+  color: springgreen;
+  text-align: center;
+  padding-bottom: 5px;
+  font-size: 2.5rem;
+}
+
+#lyric {
+  overflow-y: scroll;
+  display: block;
+  padding-bottom: 25px;
+  height: 100%;
+  width: 100%;
+}
+
+#lyric::-webkit-scrollbar {
+  width: 0px;
+  /* border-radius: 15px; */
+}
+
+#lyric::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 15px;
+}
+
+#lyric::-webkit-scrollbar-thumb {
+  background: radial-gradient(pink, violet);
+  border-radius: 15px;
 }

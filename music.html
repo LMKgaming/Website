@@ -68,54 +68,63 @@
                 </div>
             </div>
             <div class="content">
-                <div class="player">
-                    <div class="song-status">
-                        <h4>Playing</h4>
+                <div class="left">
+                    <div class="player">
+                        <div class="song-status">
+                            <h4>Playing</h4>
+                        </div>
+                        <div class="song-name">
+                            <h2>Yêu là cưới</h2>
+                            <h3>H2K</h3>
+                        </div>
+                        <div class="song-thumb">
+                            <img src="./img/binh.jpg" alt="" />
+                        </div>
+                        <div class="progress-bar">
+                            <input
+                                type="range"
+                                name=""
+                                id="progress-bar"
+                                min="0"
+                                max="100"
+                                value="0"
+                            />
+                        </div>
+                        <div class="controller">
+                            <button class="control-btn lyric">
+                                <i class="fa-solid fa-align-justify"></i>
+                            </button>
+                            <button class="control-btn random">
+                                <i class="fas fa-random"></i>
+                            </button>
+                            <button class="control-btn back">
+                                <i class="fas fa-step-backward"></i>
+                            </button>
+                            <button class="control-btn back-seek">
+                                <i class="fas fa-backward"></i>
+                            </button>
+                            <button class="control-btn play">
+                                <i class="fas fa-play-circle"></i>
+                            </button>
+                            <button class="control-btn next-seek">
+                                <i class="fas fa-forward"></i>
+                            </button>
+                            <button class="control-btn next">
+                                <i class="fas fa-step-forward"></i>
+                            </button>
+                            <button class="control-btn repeat">
+                                <i class="fas fa-repeat"></i>
+                            </button>
+                            <input type="range" name="" id="volume-bar" class="volume-bar" min="0" max="100" value="100">
+                            <output class="output"></output>
+                        </div>
                     </div>
-                    <div class="song-name">
-                        <h2>Yêu là cưới</h2>
-                        <h3>H2K</h3>
-                    </div>
-                    <div class="song-thumb">
-                        <img src="./img/binh.jpg" alt="" />
-                    </div>
-                    <div class="progress-bar">
-                        <input
-                            type="range"
-                            name=""
-                            id="progress-bar"
-                            min="0"
-                            max="100"
-                            value="0"
-                        />
-                    </div>
-                    <div class="controller">
-                        <button class="control-btn random">
-                            <i class="fas fa-random"></i>
-                        </button>
-                        <button class="control-btn back">
-                            <i class="fas fa-step-backward"></i>
-                        </button>
-                        <button class="control-btn back-seek">
-                            <i class="fas fa-backward"></i>
-                        </button>
-                        <button class="control-btn play">
-                            <i class="fas fa-play-circle"></i>
-                        </button>
-                        <button class="control-btn next-seek">
-                            <i class="fas fa-forward"></i>
-                        </button>
-                        <button class="control-btn next">
-                            <i class="fas fa-step-forward"></i>
-                        </button>
-                        <button class="control-btn repeat">
-                            <i class="fas fa-repeat"></i>
-                        </button>
-                        <input type="range" name="" id="volume-bar" class="volume-bar" min="0" max="100" value="100">
-                        <output class="output"></output>
-                    </div>
+                    <div class="playlist"></div>
                 </div>
-                <div class="playlist"></div>
+                <div class="right">
+                    <span>Lyric</span>
+                    <p id="lyric">jklasjf;lkasj;</p>
+                </div>
                 <audio id="audio" src=""></audio>
             </div>
         </div>
