@@ -19,6 +19,9 @@ var lyricContent = document.querySelector("#lyric")
 var left = document.querySelector(".left")
 var right = document.querySelector(".right")
 var find = document.querySelector(".find")
+var labelSearch = document.querySelector("#search")
+var input = document.querySelector(".input")
+var searchResult = document.querySelector(".search-result")
 
 const PLAYER_STORAGE_KEY = 'KHOAYEUBINH'
 
@@ -616,14 +619,12 @@ function scrollSong(name) {
 }
 
 function loadConfig() {
-    if (config != {}) {
-        defineProperties.isRepeating = config.isRepeating ? config.isRepeating : false
-        defineProperties.isShuffling = config.isShuffling ? config.isShuffling : false
-        defineProperties.currentSong = config.currentSong
-        audio.volume = config.volume ? config.volume : 1
-        volumeBar.value = String(config.volume ? config.volume*100 : 1*100)
-        defaultRender()
-    }
+    defineProperties.isRepeating = config.isRepeating ? config.isRepeating : false
+    defineProperties.isShuffling = config.isShuffling ? config.isShuffling : false
+    defineProperties.currentSong = config.currentSong ? config.currentSong : 0
+    audio.volume = config.volume ? config.volume : 1
+    volumeBar.value = String(config.volume ? config.volume*100 : 1*100)
+    defaultRender()
 }
 loadConfig()
 
@@ -841,7 +842,15 @@ function volumeBarChange() {
 }
 
 lyricBtn.onclick = function () {
-    this.firstElementChild.classList.toggle("active-config")
+    if (find.firstElementChild.classList.contains("active-config")) {
+        labelSearch.classList.remove("active-search")
+        input.classList.remove("active-search")
+        find.firstElementChild.classList.remove("active-config")
+        searchResult.style.opacity = "0"
+        searchResult.innerHTML = ""
+        input.value = ""
+    }
+    lyricBtn.firstElementChild.classList.toggle("active-config")
     if (left.classList.contains("trans")) {
         right.style.opacity = "0"
         right.style.visible = "hidden"
@@ -861,14 +870,28 @@ lyricBtn.onclick = function () {
     }
 }
 
-var labelSearch = document.querySelector("#search")
-var input = document.querySelector(".input")
-var searchResult = document.querySelector(".search-result")
-
 find.onclick = function() {
+    if (lyricBtn.firstElementChild.classList.contains("active-config")) {
+        lyricBtn.firstElementChild.classList.remove("active-config")
+        if (left.classList.contains("trans")) {
+            right.style.opacity = "0"
+            right.style.visible = "hidden"
+            right.style.width = "0px"
+            right.style.height = "0px"
+            setTimeout(()=>{
+                left.classList.remove("trans")
+            },500)
+        }
+    }
     labelSearch.classList.toggle("active-search")
     input.classList.toggle("active-search")
-    this.firstElementChild.classList.toggle("active-config")
+    find.firstElementChild.classList.toggle("active-config")
+    if (!find.classList.contains("active-config")) {
+        searchResult.style.opacity = "0"
+        searchResult.innerHTML = ""
+        input.value = ""
+        labelSearch.classList.remove("focus-search")
+    }
 }
 
 input.addEventListener("focusin",function() {
@@ -891,8 +914,20 @@ function renderSearch() {
                     </div>`
             }
         })
+        searchResult.style.opacity = "1"
         searchResult.innerHTML = htmls.join("")
     } else {
+        searchResult.style.opacity = "0"
         searchResult.innerHTML = ""
     } 
+}
+
+searchResult.onclick = function(e) {
+    const songNodeFile = e.target.closest('.song-info')
+    if (songNodeFile) {
+        defineProperties.currentSong = Number(songNodeFile.dataset.value)
+        isPlaying = true
+        loadCurrentSong()
+        playSong()
+    }
 }

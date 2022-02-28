@@ -213,6 +213,7 @@ body {
   border-radius: 15px;
   margin-bottom: 10px;
   cursor: pointer;
+  transition: all .25s;
 }
 
 .song-file:hover {
@@ -362,13 +363,17 @@ body {
 }
 
 .search-result {
-  border-radius: 15px;
+  /* border-radius: 15px; */
   overflow-y: scroll;
   height: 300px;
   margin-top: 5px;
+  opacity: 0;
+  transition: all 2s;
 }
 
 .song-info {
+  cursor: pointer;
+  position: relative;
   border-top: 1px solid #333;
   border-bottom: 1px solid #333;
   width: 100%;
@@ -379,6 +384,25 @@ body {
   font-size: 1.5rem;
   background-color: rgba(0,0,0,0.1);
   padding: 10px 5px;
+}
+
+.song-info::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  right: 50%;
+  width: 0;
+  height: 100%;
+  background-color: rgba(255, 0, 255, 0.8);
+  transition: all .9s cubic-bezier(0.6, 0.04, 0.98, 0.335);
+  z-index: -1;
+}
+
+.song-info:hover::after{
+  width: 100%;
+  left: 0;
+  right: 0;
 }
 
 .search-result::-webkit-scrollbar {
