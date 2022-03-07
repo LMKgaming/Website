@@ -9,7 +9,7 @@
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
         />
         <link rel="stylesheet" href="./beauty/main.css" class="css"/>
-        <link rel="stylesheet" href="./beauty/index.css">
+        <link rel="stylesheet" href="./beauty/game.css">
         <title>home</title>
     </head>
     <body>
@@ -73,11 +73,41 @@
                 </div>
             </div>
             <div class="content">
-                <h1>welcome to my first page</h1>
-                <h2></h2>
+                <div class="game-list">
+                    <div class="game-item find-name-country">
+                        <div class="img">
+                            <img class="game-img" src="./img/cold.png" alt="">
+                        </div>
+                        <h3 class="game-name">Find name country</h3>
+                    </div>
+                </div>
+                <div class="game-choose playing">
+                    <div class="window-game">
+                        <div class="flag"><img src="" alt=""></div>
+                        <div class="sentence">What is this country?</div>
+                        <div class="answer">
+                            <div>A</div>
+                            <div>B</div>
+                            <div>C</div>
+                            <div>D</div>
+                        </div>
+                        <div class="result">
+                            <span>Score: </span>
+                            <span class="score">0</span><br>
+                            <span class="highest-score">Highest Score: 0</span>
+                        </div>
+                    </div>
+                    <div class="lose playing">
+                        <span>You lose!!!</span>
+                        <span class="lasted-score">Your Score: 0</span>
+                        <span class="highest-score">Highest Score: </span>
+                        <button class="again">play again</button>
+                        <button class="back">back to home</button>
+                    </div>
+                </div>
             </div>
         </div>
         <script src="./function/navbar.js"></script>
-        <script src="./function/index.js"></script>
+        <script src="./function/game.js"></script>
     </body>
 </html>

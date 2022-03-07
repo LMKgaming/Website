@@ -1070,7 +1070,7 @@ input.addEventListener("input",renderSearch)
 function renderSearch() {
     if (!input.value == "") {
         const htmls = songList.map((song,index)=>{
-            if (song.name.includes(input.value) || song.author.includes(input.value)) {
+            if (song.name.toLocaleLowerCase().includes(input.value.toLocaleLowerCase()) || song.author.toLocaleLowerCase().includes(input.value.toLocaleLowerCase())) {
                 return `
                     <div class="song-info" data-value="${index}">
                         <h3>${song.name}</h3>

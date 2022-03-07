@@ -56,6 +56,11 @@ async function changeWeather(capitalSearch) {
     
 }
 
+weatherSearch.addEventListener("focusout",()=>{
+    let capitalSearch = weatherSearch.value.trim()
+    changeWeather(capitalSearch)
+})
+
 weatherSearch.onkeypress = (e) => {
     // console.log(e.code == 'Enter')
     if (e.code == "Enter") {
