@@ -118,6 +118,7 @@ backBtn.onclick = function() {
     gameList.classList.toggle("playing")
     gameChoose.classList.toggle("playing")
     loseScreen.classList.toggle("playing")
+    score.innerText = 0
 }
 
 // var script = document.createElement('script')
