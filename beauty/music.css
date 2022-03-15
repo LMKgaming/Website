@@ -9,7 +9,7 @@ body {
 }
 
 .left {
-  transform: translateX(34%);
+  transform: translateX(40%);
   transition: all 0.8s linear;
 }
 
@@ -21,7 +21,7 @@ body {
   width: 500px;
   height: 400px;
   margin: 0 auto;
-  background-color: #2daaed;
+  background-color: #2daaedb4;
   border-radius: 15px;
   padding: 0 20px;
   /* display: flex;
@@ -206,7 +206,7 @@ body {
   width: 100%;
   height: fit-content;
   display: flex;
-  background-color: white;
+  background-color: rgba(255, 255, 255, 0.651);
   /* justify-content: space-between; */
   align-items: center;
   padding: 12px 0;
@@ -214,6 +214,7 @@ body {
   margin-bottom: 10px;
   cursor: pointer;
   transition: all .25s;
+  position: relative;
 }
 
 .song-file:hover {
@@ -256,10 +257,41 @@ body {
   /* justify-self: flex-end; */
   margin: 0 20px;
   font-size: 1.5rem;
-  background-color: #ccc;
+  background-color: transparent;
   padding: 10px;
   border-radius: 100rem;
   color: #333;
+}
+
+.song-option ul {
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+  overflow: hidden;
+  right: 0;
+  top: 50%;
+  transition: all 0.5s linear;
+  transform: translate(-70%,-50%);
+  background-color: black;
+  color: white;
+  z-index: 100;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+
+.active-option {
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+.song-option ul li {
+  transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+  display: block;
+  padding: 5px 5px;
+}
+
+.song-option ul li:hover {
+  color: black;
+  background-color: white;
 }
 
 .right {
@@ -418,4 +450,76 @@ body {
 .search-result::-webkit-scrollbar-thumb {
   background: radial-gradient(pink, violet);
   border-radius: 15px;
+}
+
+.loading {
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  animation: animate 5s linear infinite;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%,-50%);
+}
+
+@keyframes animate {
+  0% {
+    filter: hue-rotate(0deg);
+  }
+  100% {
+    filter: hue-rotate(360deg);
+  }
+}
+
+.loading h2 {
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  font-size: 3rem;
+  color: rgb(255, 251, 0);
+}
+.loading .finish {
+  visibility: hidden;
+}
+.loading .waiting {
+  visibility: visible;
+}
+
+.loading span {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transform: rotate(calc(18deg * var(--i)));
+}
+
+.loading span::before{
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  top: 0;
+  left: 0;
+  width: 15px;
+  height: 15px;
+  background-color: blue;
+  box-shadow: 0 0 10px blue,
+              0 0 20px blue,
+              0 0 40px blue,
+              0 0 60px blue,
+              0 0 80px blue,
+              0 0 100px blue;
+  animation: rotate 1s linear infinite;
+  animation-delay: calc(0.05s * var(--i));
+}
+
+@keyframes rotate {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0);
+  }
 }

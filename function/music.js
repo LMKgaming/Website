@@ -22,7 +22,7 @@ var find = document.querySelector(".find")
 var labelSearch = document.querySelector("#search")
 var input = document.querySelector(".input")
 var searchResult = document.querySelector(".search-result")
-
+var loading = document.querySelector(".loading")
 const PLAYER_STORAGE_KEY = 'KHOAYEUBINH'
 
 const defineProperties = {
@@ -752,6 +752,22 @@ songList = [
     }    
 ]
 
+function loadingTime(obj) {
+    obj.style.visibility = "hidden"
+    loading.style.visibility = "visible"
+    setTimeout(()=>{
+        loading.children[0].style.visibility = "hidden"
+        loading.children[1].style.visibility = "visible"
+        setTimeout(()=>{
+            loading.children[1].style.visibility = "hidden"
+            obj.style.visibility = "visible"
+            loading.style.visibility = "hidden"
+        },5000)
+    },4000)
+    
+}
+loadingTime(playList)
+
 function renderListSong() {
     const htmls = songList.map((song, index) => {
         return `
@@ -763,13 +779,16 @@ function renderListSong() {
                 <h3>${song.name}</h3>
                 <h4>${song.author}</h4>
             </div>
-            <div class="song-option">
-                <i class="fas fa-ellipsis-h"></i>
-                <!-- <ul>
+            <div class="song-option" data-value="${index}">
+                <i class="setting fas fa-ellipsis-h"></i>
+                <ul class="more-option">
                     <li>
-                        <i class="fas fa-heart"></i>
+                        <i class="like fa-regular fa-heart">Like</i>
                     </li>
-                </ul> -->
+                    <li>
+                        <i class="trash fa-solid fa-trash"><span>Delete</span></i> 
+                    </li>
+                </ul>
             </div>
         </div>
         `
@@ -798,7 +817,6 @@ function defaultRender() {
     loadCurrentSong()
 }
 
-
 function loadCurrentSong() {
     songName.innerText = songList[defineProperties.currentSong].name
     songAuthor.innerText = songList[defineProperties.currentSong].author
@@ -820,7 +838,8 @@ loadCurrentSong()
 
 playList.onclick = function(e) {
     const songNodeFile = e.target.closest('.song-file:not(.playing)')
-    if (songNodeFile || e.target.closest('.song-option')) {
+    const songSettingNode = e.target.closest('.song-option')
+    if (songNodeFile || songSettingNode) {
         if (songNodeFile) {
             // console.log(songNodeFile.dataset.value)
             defineProperties.currentSong = Number(songNodeFile.dataset.value)
@@ -828,8 +847,19 @@ playList.onclick = function(e) {
             isPlaying = true
             playSong()
         }
-        if (e.target.closest('.song-option')) {
-
+        if (songSettingNode) {
+            songSettingNode.lastElementChild.classList.toggle("active-option")
+            var likeBtn = songSettingNode.lastElementChild.firstElementChild
+            likeBtn.onclick = () => {
+                var likedList = config.liked ? config.liked : []
+                if (likedList.includes(songSettingNode.dataset.value)) {
+                    likedList = likedList.slice(0,likedList.indexOf(songSettingNode.dataset.value)).concat(likedList.slice(likedList.indexOf(songSettingNode.dataset.value) + 1))
+                    setConfig("liked",likedList)
+                } else {
+                    likedList.push(songSettingNode.dataset.value)
+                    setConfig("liked",likedList)
+                }
+            }
         }
     }
 }
