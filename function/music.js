@@ -753,6 +753,7 @@ songList = [
 ]
 
 function loadingTime(obj) {
+    loading.children[0].style.visibility = "visible"
     obj.style.visibility = "hidden"
     loading.style.visibility = "visible"
     setTimeout(()=>{
@@ -768,8 +769,37 @@ function loadingTime(obj) {
 }
 loadingTime(playList)
 
-function renderListSong() {
+function renderListSong(filter) {
     const htmls = songList.map((song, index) => {
+        if (filter) {
+            console.log('pass 1')
+            if (filter.includes(index.toString())) {
+                console.log('pass 2')
+                return `
+                <div class="song-file" data-value="${index}">
+                    <div class="song-thumb-mini">
+                        <img src="${song.img ? song.img : './img/binh.jpg'}" alt="" />
+                    </div>
+                    <div class="song-desc-mini">
+                        <h3>${song.name}</h3>
+                        <h4>${song.author}</h4>
+                    </div>
+                    <div class="song-option" data-value="${index}">
+                        <i class="setting fas fa-ellipsis-h"></i>
+                        <ul class="more-option">
+                            <li>
+                                <i class="like fa-regular fa-heart">Like</i>
+                            </li>
+                            <li>
+                                <i class="trash fa-solid fa-trash"><span>Delete</span></i> 
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                `
+            }
+            else return
+        }
         return `
         <div class="song-file" data-value="${index}">
             <div class="song-thumb-mini">
@@ -1123,5 +1153,41 @@ searchResult.onclick = function(e) {
         isPlaying = true
         loadCurrentSong()
         playSong()
+    }
+}
+var filterBtn = document.querySelector(".submit-filter button i")
+var filterList = document.querySelector(".submit-filter ul")
+var filterListItem = document.querySelectorAll(".submit-filter ul li")
+var songStatus = document.querySelector(".song-status")
+filterBtn.onclick = function () {
+    filterBtn.classList.toggle("filter-open")
+    filterList.classList.toggle("filter-list-open")
+}
+for (const item of filterListItem) {
+    item.onclick = function () {
+        if (filterBtn.classList.contains("filter-open")) {
+            filterBtn.classList.remove("filter-open")
+            filterList.classList.remove("filter-list-open")
+        }
+        songStatus.innerText = `Playing (${item.getAttribute("value")} song)`
+        switch (item.getAttribute("value")) {
+            case "all":
+                loadingTime(playList)
+                renderListSong()
+                break
+            case "delete":
+                loadingTime(playList)
+                renderListSong(config.deleted)
+                break
+            case "custom":
+                loadingTime(playList)
+                break
+            case "like":
+                loadingTime(playList)
+                renderListSong(config.liked ? config.liked : [])
+                break
+            default:
+                break
+        }
     }
 }
