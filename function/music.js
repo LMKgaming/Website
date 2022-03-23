@@ -23,6 +23,10 @@ var labelSearch = document.querySelector("#search")
 var input = document.querySelector(".input")
 var searchResult = document.querySelector(".search-result")
 var loading = document.querySelector(".loading")
+var filterBtn = document.querySelector(".submit-filter button i")
+var filterList = document.querySelector(".submit-filter ul")
+var filterListItem = document.querySelectorAll(".submit-filter ul li")
+var songStatus = document.querySelector(".song-status")
 const PLAYER_STORAGE_KEY = 'KHOAYEUBINH'
 
 const defineProperties = {
@@ -752,7 +756,7 @@ songList = [
     }    
 ]
 
-function loadingTime(obj) {
+function loadingTime(obj,time=4000) {
     loading.children[0].style.visibility = "visible"
     obj.style.visibility = "hidden"
     loading.style.visibility = "visible"
@@ -763,8 +767,9 @@ function loadingTime(obj) {
             loading.children[1].style.visibility = "hidden"
             obj.style.visibility = "visible"
             loading.style.visibility = "hidden"
-        },5000)
-    },4000)
+            loadCurrentSong()
+        },time*5/4)
+    },time)
     
 }
 loadingTime(playList)
@@ -772,9 +777,34 @@ loadingTime(playList)
 function renderListSong(filter) {
     const htmls = songList.map((song, index) => {
         if (filter) {
-            console.log('pass 1')
-            if (filter.includes(index.toString())) {
-                console.log('pass 2')
+            if (filter == "custom") {
+                if (!config.deleted.includes(index.toString())) {
+                    return `
+                    <div class="song-file" data-value="${index}">
+                        <div class="song-thumb-mini">
+                            <img src="${song.img ? song.img : './img/binh.jpg'}" alt="" />
+                        </div>
+                        <div class="song-desc-mini">
+                            <h3>${song.name}</h3>
+                            <h4>${song.author}</h4>
+                        </div>
+                        <div class="song-option" data-value="${index}">
+                            <i class="setting fas fa-ellipsis-h"></i>
+                            <ul class="more-option">
+                                <li>
+                                    <i class="like fa-regular fa-heart">Like</i>
+                                </li>
+                                <li>
+                                    <i class="trash fa-solid fa-trash"><span>Delete</span></i> 
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    `
+                }
+                else return
+            }
+            else if (filter.includes(index.toString())) {
                 return `
                 <div class="song-file" data-value="${index}">
                     <div class="song-thumb-mini">
@@ -825,7 +855,13 @@ function renderListSong(filter) {
     })
     playList.innerHTML = htmls.join("")
 }
-renderListSong()
+if (config.deleted) {
+    renderListSong('custom')
+    songStatus.innerText = `Playing (custom song)`
+} else {
+    renderListSong()
+    songStatus.innerText = `Playing (all song)`
+}
 
 function scrollSong(name) {
     name.scrollIntoView({behavior: 'smooth',block: 'center',inline: 'nearest'})
@@ -835,8 +871,14 @@ function loadConfig() {
     defineProperties.isRepeating = config.isRepeating ? config.isRepeating : false
     defineProperties.isShuffling = config.isShuffling ? config.isShuffling : false
     defineProperties.currentSong = config.currentSong ? config.currentSong : 0
-    audio.volume = config.volume ? config.volume : 1
-    volumeBar.value = String(config.volume ? config.volume*100 : 1*100)
+    if (config.volume || config.volume == 0) {
+        audio.volume = config.volume
+        volumeBar.value = String(config.volume*100)
+    } else {
+        audio.volume = 1
+        volumeBar.value = String(100)
+    }
+    
     defaultRender()
 }
 loadConfig()
@@ -890,6 +932,21 @@ playList.onclick = function(e) {
                     setConfig("liked",likedList)
                 }
             }
+            var delBtn = songSettingNode.lastElementChild.lastElementChild
+            delBtn.onclick = () => {
+                var deletedList = config.deleted ? config.deleted : []
+                if (deletedList.includes(songSettingNode.dataset.value)) {
+                    deletedList = deletedList.slice(0,deletedList.indexOf(songSettingNode.dataset.value)).concat(deletedList.slice(deletedList.indexOf(songSettingNode.dataset.value) + 1))
+                    setConfig("deleted",deletedList)
+                } else {
+                    deletedList.push(songSettingNode.dataset.value)
+                    setConfig("deleted",deletedList)
+                }
+                nextSong()
+                songStatus.innerText = `Playing (custom song)`
+                loadingTime(playList,1000)
+                renderListSong("custom")
+            }
         }
     }
 }
@@ -918,9 +975,55 @@ nextBtn.onclick = function () {
 }
 
 function nextSong() {
-    defineProperties.currentSong = defineProperties.currentSong + 1
-    if (defineProperties.currentSong>=songList.length) defineProperties.currentSong = 0
-    loadCurrentSong()
+    var text = songStatus.innerText
+    if (text.includes("like")) {
+        let list = []
+        for (let i = 0; i < config.liked.length; i++) {
+            list.push(Number(config.liked[i]))
+        }
+        list = list.sort((a,b)=>a-b)
+        if (list.indexOf(defineProperties.currentSong)+1 >= list.length) {
+            defineProperties.currentSong = Number(list[0])
+        } else {
+            defineProperties.currentSong = Number(list[list.indexOf(defineProperties.currentSong)+1])
+        }
+        loadCurrentSong()
+    } else if (text.includes("delete")) {
+        let list = []
+        for (let i = 0; i < config.deleted.length; i++) {
+            list.push(Number(config.deleted[i]))
+        }
+        list = list.sort((a,b)=>a-b)
+        if (list.indexOf(defineProperties.currentSong)+1 >= list.length) {
+            defineProperties.currentSong = Number(list[0])
+        } else {
+            defineProperties.currentSong = Number(list[list.indexOf(defineProperties.currentSong)+1])
+        }
+        loadCurrentSong()
+    } else if (text.includes("custom")) {
+        defineProperties.currentSong = defineProperties.currentSong + 1
+        while (config.deleted.includes(String(defineProperties.currentSong))) {
+            defineProperties.currentSong = Number(defineProperties.currentSong) + 1
+            if (defineProperties.currentSong >= songList.length) {
+                defineProperties.currentSong = 0
+            }
+        }
+        if (defineProperties.currentSong >= songList.length) {
+            defineProperties.currentSong = 0
+            while (config.deleted.includes(String(defineProperties.currentSong))) {
+                defineProperties.currentSong = Number(defineProperties.currentSong) + 1
+                if (defineProperties.currentSong >= songList.length) {
+                    defineProperties.currentSong = 0
+                }
+            }
+        }
+        loadCurrentSong()
+    } else {
+        defineProperties.currentSong = defineProperties.currentSong + 1
+        if (defineProperties.currentSong>=songList.length) defineProperties.currentSong = 0
+        loadCurrentSong()
+    }
+    
 }
 
 backBtn.onclick = function () {
@@ -938,9 +1041,54 @@ backBtn.onclick = function () {
 }
 
 function backSong() {
-    defineProperties.currentSong = defineProperties.currentSong -1
-    if (defineProperties.currentSong < 0) defineProperties.currentSong = songList.length - 1
-    loadCurrentSong()
+    var text = songStatus.innerText
+    if (text.includes("like")) {
+        let list = []
+        for (let i = 0; i < config.liked.length; i++) {
+            list.push(Number(config.liked[i]))
+        }
+        list = list.sort((a,b)=>a-b)
+        if (list.indexOf(defineProperties.currentSong)-1 < 0) {
+            defineProperties.currentSong = Number(list[list.length - 1])
+        } else {
+            defineProperties.currentSong = Number(list[list.indexOf(defineProperties.currentSong)-1])
+        }
+        loadCurrentSong()
+    } else if (text.includes("delete")) {
+        let list = []
+        for (let i = 0; i < config.deleted.length; i++) {
+            list.push(Number(config.deleted[i]))
+        }
+        list = list.sort((a,b)=>a-b)
+        if (list.indexOf(defineProperties.currentSong)-1 < 0) {
+            defineProperties.currentSong = Number(list[list.length - 1])
+        } else {
+            defineProperties.currentSong = Number(list[list.indexOf(defineProperties.currentSong)-1])
+        }
+        loadCurrentSong()
+    } else if (text.includes("custom")) {
+        defineProperties.currentSong = defineProperties.currentSong - 1
+        while (config.deleted.includes(String(defineProperties.currentSong))) {
+            defineProperties.currentSong = Number(defineProperties.currentSong) - 1
+            if (defineProperties.currentSong < 0) {
+                defineProperties.currentSong = songList.length - 1
+            }
+        }
+        if (defineProperties.currentSong < 0) {
+            defineProperties.currentSong = songList.length - 1
+            while (config.deleted.includes(String(defineProperties.currentSong))) {
+                defineProperties.currentSong = Number(defineProperties.currentSong) - 1
+                if (defineProperties.currentSong < 0) {
+                    defineProperties.currentSong = songList.length - 1
+                }
+            }
+        }
+        loadCurrentSong()
+    } else {
+        defineProperties.currentSong = defineProperties.currentSong - 1
+        if (defineProperties.currentSong < 0) defineProperties.currentSong = songList.length - 1
+        loadCurrentSong()
+    }
 }
 
 const cdThumbAnimate = cdThumb.animate([
@@ -1155,10 +1303,7 @@ searchResult.onclick = function(e) {
         playSong()
     }
 }
-var filterBtn = document.querySelector(".submit-filter button i")
-var filterList = document.querySelector(".submit-filter ul")
-var filterListItem = document.querySelectorAll(".submit-filter ul li")
-var songStatus = document.querySelector(".song-status")
+
 filterBtn.onclick = function () {
     filterBtn.classList.toggle("filter-open")
     filterList.classList.toggle("filter-list-open")
@@ -1176,14 +1321,15 @@ for (const item of filterListItem) {
                 renderListSong()
                 break
             case "delete":
-                loadingTime(playList)
-                renderListSong(config.deleted)
+                loadingTime(playList,2000)
+                renderListSong(config.deleted ? config.deleted : [])
                 break
             case "custom":
-                loadingTime(playList)
+                loadingTime(playList,2000)
+                renderListSong("custom")
                 break
             case "like":
-                loadingTime(playList)
+                loadingTime(playList,2000)
                 renderListSong(config.liked ? config.liked : [])
                 break
             default:

@@ -19,7 +19,6 @@ setInterval(() => {
 async function changeWeather(capitalSearch) {
     let apiURL = `https://api.openweathermap.org/data/2.5/weather?q=${capitalSearch}&appid=197deba011f3f1920baf9fc6ba8864fc&lang=vi`
     let data = await fetch(apiURL).then(res=> res.json())
-    console.log(data)
     if (data.cod === 200) {
         weatherContent.classList.remove("hide")
         city.innerText = data.name
