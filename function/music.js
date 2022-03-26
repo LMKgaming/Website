@@ -774,63 +774,8 @@ function loadingTime(obj,time=4000) {
 }
 loadingTime(playList)
 
-function renderListSong(filter) {
-    const htmls = songList.map((song, index) => {
-        if (filter) {
-            if (filter == "custom") {
-                if (!config.deleted.includes(index.toString())) {
-                    return `
-                    <div class="song-file" data-value="${index}">
-                        <div class="song-thumb-mini">
-                            <img src="${song.img ? song.img : './img/binh.jpg'}" alt="" />
-                        </div>
-                        <div class="song-desc-mini">
-                            <h3>${song.name}</h3>
-                            <h4>${song.author}</h4>
-                        </div>
-                        <div class="song-option" data-value="${index}">
-                            <i class="setting fas fa-ellipsis-h"></i>
-                            <ul class="more-option">
-                                <li>
-                                    <i class="like fa-regular fa-heart">Like</i>
-                                </li>
-                                <li>
-                                    <i class="trash fa-solid fa-trash"><span>Delete</span></i> 
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    `
-                }
-                else return
-            }
-            else if (filter.includes(index.toString())) {
-                return `
-                <div class="song-file" data-value="${index}">
-                    <div class="song-thumb-mini">
-                        <img src="${song.img ? song.img : './img/binh.jpg'}" alt="" />
-                    </div>
-                    <div class="song-desc-mini">
-                        <h3>${song.name}</h3>
-                        <h4>${song.author}</h4>
-                    </div>
-                    <div class="song-option" data-value="${index}">
-                        <i class="setting fas fa-ellipsis-h"></i>
-                        <ul class="more-option">
-                            <li>
-                                <i class="like fa-regular fa-heart">Like</i>
-                            </li>
-                            <li>
-                                <i class="trash fa-solid fa-trash"><span>Delete</span></i> 
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                `
-            }
-            else return
-        }
-        return `
+function struct(song,index) {
+    return `
         <div class="song-file" data-value="${index}">
             <div class="song-thumb-mini">
                 <img src="${song.img ? song.img : './img/binh.jpg'}" alt="" />
@@ -852,6 +797,21 @@ function renderListSong(filter) {
             </div>
         </div>
         `
+}
+
+function renderListSong(filter) {
+    const htmls = songList.map((song, index) => {
+        if (!filter) return struct(song,index)
+        
+        if (filter == "custom") {
+            if (config.deleted?.includes(index.toString())) return
+            return struct(song,index)
+        }
+        else if (filter.includes(index.toString())) {
+            return struct(song,index)
+        }
+        else return
+        
     })
     playList.innerHTML = htmls.join("")
 }
@@ -942,10 +902,12 @@ playList.onclick = function(e) {
                     deletedList.push(songSettingNode.dataset.value)
                     setConfig("deleted",deletedList)
                 }
-                nextSong()
                 songStatus.innerText = `Playing (custom song)`
+                
                 loadingTime(playList,1000)
                 renderListSong("custom")
+                isPlaying = true
+                nextSong()
             }
         }
     }
