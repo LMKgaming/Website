@@ -917,6 +917,55 @@ playBtn.onclick = function () {
     playSong()
 }
 
+document.onkeyup = (e)=>{
+    switch (e.code) {
+        case "Space":
+            playSong()
+            break
+        case "ArrowRight": 
+            changeSong("next")
+            break
+        case "ArrowLeft": 
+            changeSong("back")
+            break
+        case "ArrowDown": 
+            audio.volume = audio.volume - 10/100
+            volumeBar.value = String(audio.volume*100 - 10)
+            setConfig('volume',audio.volume)
+            break
+        case "ArrowUp": 
+            audio.volume = audio.volume + 5/100
+            volumeBar.value = String(audio.volume*100 + 5)
+            setConfig('volume',audio.volume)
+            break
+        case "KeyM": 
+            if (audio.volume) {
+                audio.volume = 0
+                volumeBar.value = String(0)
+                setConfig('volume',audio.volume)
+            } else {
+                audio.volume = 0.2
+                volumeBar.value = String(20)
+                setConfig('volume',audio.volume)
+            }
+            break
+        case "KeyF": 
+            handleFindBtn()
+            break
+        case "KeyT": 
+            handleLyricBtn()
+            break
+        case "KeyR": 
+            handleRepeatBtn()
+            break
+        case "KeyS": 
+            handleRandomBtn()
+            break
+        default:
+            break
+    }
+}
+
 audio.onplay = function() {
     isPlaying = false
     playBtn.firstElementChild.classList.remove("fa-play-circle")
@@ -932,8 +981,7 @@ audio.onpause = function() {
 }
 
 nextBtn.onclick = function () {
-    isPlaying = true
-    changeSong()
+    changeSong("next")
 }
 
 function nextSong() {
@@ -989,17 +1037,7 @@ function nextSong() {
 }
 
 backBtn.onclick = function () {
-    isPlaying = true
-    if (defineProperties.isRepeating) {
-        playSong()
-    } else if(defineProperties.isShuffling) {
-        randomSong()
-        loadCurrentSong()
-        playSong()
-    } else {
-        backSong()
-        playSong()
-    }
+    changeSong("back")
 }
 
 function backSong() {
@@ -1109,17 +1147,30 @@ function randomSong() {
     // console.log(randomNumList)
 }
 
-function changeSong() {
-    if (defineProperties.isRepeating) {
-        isPlaying = true
-        playSong()
-    } else if(defineProperties.isShuffling) {
-        randomSong()
-        loadCurrentSong()
-        playSong()
-    } else {
-        nextSong()
-        playSong()
+function changeSong(filter) {
+    isPlaying = true
+    if (filter == "next") {
+        if (defineProperties.isRepeating) {
+            playSong()
+        } else if(defineProperties.isShuffling) {
+            randomSong()
+            loadCurrentSong()
+            playSong()
+        } else {
+            nextSong()
+            playSong()
+        }
+    } else if (filter == "back") {
+        if (defineProperties.isRepeating) {
+            playSong()
+        } else if(defineProperties.isShuffling) {
+            randomSong()
+            loadCurrentSong()
+            playSong()
+        } else {
+            backSong()
+            playSong()
+        }
     }
 }
 
@@ -1127,23 +1178,25 @@ audio.onended = function() {
     changeSong()
 }
 
-repeatBtn.onclick = function() {
+repeatBtn.onclick = handleRepeatBtn
+function handleRepeatBtn() {
     if (defineProperties.isRepeating) {
         defineProperties.isRepeating = false
     } else {
         defineProperties.isRepeating = true
     }
-    this.firstElementChild.classList.toggle("active-config",defineProperties.isRepeating)
+    repeatBtn.firstElementChild.classList.toggle("active-config",defineProperties.isRepeating)
     setConfig('isRepeating',defineProperties.isRepeating)
 }
 
-randomBtn.onclick = function() {
+randomBtn.onclick = handleRandomBtn
+function handleRandomBtn() {
     if (defineProperties.isShuffling) {
         defineProperties.isShuffling = false
     } else {
         defineProperties.isShuffling = true
     }
-    this.firstElementChild.classList.toggle("active-config",defineProperties.isShuffling)
+    randomBtn.firstElementChild.classList.toggle("active-config",defineProperties.isShuffling)
     setConfig('isShuffling',defineProperties.isShuffling)
 }
 
@@ -1164,6 +1217,7 @@ randomBtn.onclick = function() {
 // }
 
 volumeBar.addEventListener('input',volumeBarChange)
+volumeBar.addEventListener('change',volumeBarChange)
 function volumeBarChange() {
     outputNumVol.style.visibility = "visible"
     audio.volume = volumeBar.value / 100
@@ -1175,7 +1229,8 @@ function volumeBarChange() {
     },5000)
 }
 
-lyricBtn.onclick = function () {
+lyricBtn.onclick = handleLyricBtn
+function handleLyricBtn () {
     if (find.firstElementChild.classList.contains("active-config")) {
         labelSearch.classList.remove("active-search")
         input.classList.remove("active-search")
@@ -1204,7 +1259,9 @@ lyricBtn.onclick = function () {
     }
 }
 
-find.onclick = function() {
+find.onclick = handleFindBtn
+
+function handleFindBtn () {
     if (lyricBtn.firstElementChild.classList.contains("active-config")) {
         lyricBtn.firstElementChild.classList.remove("active-config")
         if (left.classList.contains("trans")) {
